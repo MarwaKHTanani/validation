@@ -33,9 +33,10 @@ clearError(confirmPassword, confError);
 
 email.addEventListener("blur", () => {
   let msg = "";
+  const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   if (!email.value.trim()) {
     msg = "please enter email";
-  } else if (!email.value.includes("@")) {
+  } else if (!emailPattern.test(email.value)) {
     msg = "please enter a valid email";
   }
   setErrorStyle(email, emailError, msg);
@@ -74,7 +75,7 @@ registerForm.addEventListener("submit", (e) => {
   if (!email.value.trim()) {
     setErrorStyle(email, emailError, "please enter email");
     hasError = true;
-  } else if (!email.value.includes("@")) {
+  } else if (!emailPattern.test(email.value)) {
     setErrorStyle(email, emailError, "please enter a valid email");
     hasError = true;
   }
